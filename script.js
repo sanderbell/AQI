@@ -9,35 +9,63 @@
     const jsoned = await rawData.json();
     let result = await jsoned.data.current.pollution.aqius;
 
-    // result = 1723; // for testing purposes
+    // result = 123; // for testing purposes
+    const body = document.querySelector('body');
+    let backgroundContainer = document.querySelector('#background-container');
+    let emoji, diagnosis, favicon;
 
-    let emoji;
-    let body = document.querySelector('body');
     if (result < 51) {
       body.style.backgroundColor = '#83d77d';
-      emoji = '😍';
+      emoji = '/static/emoji/good.png';
+      favicon = '/static/favicons/good.ico';
+      diagnosis = 'good';
     } else if (result >= 50 && result < 100) {
       body.style.backgroundColor = '#f5bb00';
-      emoji = '😌';
+      emoji = '/static/emoji/moderate.png';
+      favicon = '/static/favicons/moderate.ico';
+      diagnosis = 'okayish';
     } else if (result >= 100 && result < 150) {
       body.style.backgroundColor = '#ff8119';
-      emoji = '😑';
+      emoji = '/static/emoji/ufsg.png';
+      favicon = '/static/favicons/ufsg.ico';
+      diagnosis = 'unhealthy for sensitive groups';
     } else if (result >= 150 && result < 200) {
       body.style.backgroundColor = '#e55659';
-      emoji = '🙁';
+      emoji = '/static/emoji/unhealthy.png';
+      favicon = '/static/favicons/unhealthy.ico';
+      diagnosis = 'unhealthy';
     } else if (result >= 200 && result < 300) {
       body.style.backgroundColor = '#9d75b6';
-      emoji = '🥴';
+      emoji = '/static/emoji/very-unhealthy.png';
+      favicon = '/static/favicons/very-unhealthy.ico';
+      diagnosis = 'very unhealthy';
     } else if (result >= 300) {
       body.style.backgroundColor = '#513e55';
-      emoji = '💀';
+      favicon = '/static/favicons/hazardous.ico';
+      emoji = '/static/emoji/hazardous.png';
+      diagnosis = 'hazardous';
     }
-    document.querySelector('#aqi').textContent = `${result} ${emoji}`;
-    document.querySelector(
-      'title'
-    ).textContent = `${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji}`;
-    20;
 
+    // Changing the favicon:
+    const existingFavicon = document.querySelector("link[rel*='icon']");
+    if (existingFavicon) {
+      existingFavicon.remove();
+    }
+    const faviconLink = document.createElement('link');
+    faviconLink.rel = 'icon';
+    faviconLink.type = 'image/png';
+    faviconLink.href = favicon;
+    document.head.appendChild(faviconLink);
+
+    // Changing the background:
+    backgroundContainer.style.backgroundImage = `url(${emoji})`;
+
+    // Changing the main content:
+    document.querySelector('#aqi').textContent = `${result}`;
+
+    // Changing the page title:
+    document.querySelector('title').textContent =
+      `The air is ${diagnosis}`.toUpperCase();
     document.querySelector('#spinner').style.display = 'none';
   }
   getAqi();
