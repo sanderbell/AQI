@@ -9,6 +9,8 @@
     const jsoned = await rawData.json();
     let result = await jsoned.data.current.pollution.aqius;
 
+    // result = 1723; // for testing purposes
+
     let emoji;
     let body = document.querySelector('body');
     if (result < 51) {
@@ -30,7 +32,7 @@
       body.style.backgroundColor = '#513e55';
       emoji = '💀';
     }
-    document.querySelector('#aqi').textContent = `${result}${emoji}`;
+    document.querySelector('#aqi').textContent = `${result} ${emoji}`;
     document.querySelector(
       'title'
     ).textContent = `${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji} ${emoji}`;
