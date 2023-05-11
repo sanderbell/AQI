@@ -25,19 +25,18 @@ body {
 }
 
 #background-container {
-    animation: slide-up 60s linear infinite;
+    animation: slide-up 70s linear infinite;
     position: relative;
     background-repeat: space repeat;
-    background-size: 20%;
+    background-size: 23%;
     height: 100%;
     width: 100%;
-    opacity: 0.15;
+    opacity: 0.25;
 }
-
 
 #spinner {
     display: block;
-    width: 10vw;
+    width: 12vw;
 }
 
 #container {
@@ -48,18 +47,20 @@ body {
     justify-content: center;
     margin: 0 auto;
     width: 30%;
+
 }
 
 
 #square {
     background-color: #000;
-    border-radius: 2em;
+    border-radius: 2.5em;
     opacity: 0.9;
-    padding: 4.5em;
+    padding: 2.5em;
+    
 }
 
 #aqi {
-    font-size: 27vw;
+    font-size: 28vw;
     margin: 0;
     text-align: center;
     user-select: none;
