@@ -9,7 +9,7 @@
     const jsoned = await rawData.json();
     let result = await jsoned.data.current.pollution.aqius;
 
-    // result = 123; // for testing purposes
+    result = 256; // for testing purposes
     const body = document.querySelector('body');
     let backgroundContainer = document.querySelector('#background-container');
     let emoji, diagnosis, favicon;
@@ -20,7 +20,7 @@
       favicon = '/static/favicons/good.ico';
       diagnosis = 'good';
     } else if (result >= 50 && result < 100) {
-      body.style.backgroundColor = '#f5bb00';
+      body.style.backgroundColor = '#f5b200';
       emoji = '/static/emoji/moderate.png';
       favicon = '/static/favicons/moderate.ico';
       diagnosis = 'okayish';
@@ -40,7 +40,7 @@
       favicon = '/static/favicons/very-unhealthy.ico';
       diagnosis = 'very unhealthy';
     } else if (result >= 300) {
-      body.style.backgroundColor = '#513e55';
+      body.style.backgroundColor = '#3a2c3d';
       favicon = '/static/favicons/hazardous.ico';
       emoji = '/static/emoji/hazardous.png';
       diagnosis = 'hazardous';

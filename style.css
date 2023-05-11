@@ -28,11 +28,10 @@ body {
     animation: slide-up 60s linear infinite;
     position: relative;
     background-repeat: space repeat;
-    background-size: 10%;
+    background-size: 20%;
     height: 100%;
     width: 100%;
-    opacity: 0.2;
-    z-index: -1;
+    opacity: 0.15;
 }
 
 
@@ -49,19 +48,18 @@ body {
     justify-content: center;
     margin: 0 auto;
     width: 30%;
-    z-index: 12;
 }
 
 
 #square {
     background-color: #000;
     border-radius: 2em;
-    opacity: 0.8;
-    padding: 5em;
+    opacity: 0.9;
+    padding: 4.5em;
 }
 
 #aqi {
-    font-size: 22vw;
+    font-size: 27vw;
     margin: 0;
     text-align: center;
     user-select: none;
