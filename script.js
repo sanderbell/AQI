@@ -9,7 +9,9 @@
     const jsoned = await rawData.json();
     let result = await jsoned.data.current.pollution.aqius;
 
-    result = 2256; // for testing purposes
+  // function getAqi() { // for testing purposes
+  //   result = 2234; // for testing purposes
+  
     const body = document.querySelector('body');
     let backgroundContainer = document.querySelector('#background-container');
     let emoji, diagnosis, favicon;
@@ -64,8 +66,7 @@
     document.querySelector('#aqi').textContent = `${result}`;
 
     // Changing the page title:
-    document.querySelector('title').textContent =
-      `The air is ${diagnosis}!`;
+    document.querySelector('title').textContent = `The air is ${diagnosis}!`;
     document.querySelector('#spinner').style.display = 'none';
   }
   getAqi();
