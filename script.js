@@ -1,25 +1,48 @@
 (function () {
-  // 'use strict';
-  try {
-    // async function getAqi() {
+  'use strict';
 
-    //   const rawData = await fetch(
-    //     'https://api.airvisual.com/v2/nearest_city?lat=18.7883&lon=98.9853&key=0fcbe316-1ca4-4621-a9d2-329e605f7c98'
-    //   );
+  async function getAqi() {
+    try {
+      const cachedAqi = localStorage.getItem('cachedAqi');
+      const timestamp = localStorage.getItem('timestamp');
+      const timeToUpdate = Date.now() - parseInt(timestamp) >= 3 * 60 * 1000;
 
-    //   const jsoned = await rawData.json();
-    //   let aqi = await jsoned.data.current.pollution.aqius;
+      // Is there cached data yet
+      //and was it updated less than 3 mins ago?
+      if (cachedAqi && !timeToUpdate) {
+        console.log(
+          `Too early to update. Next API fetch will be in ${(
+            (3 * 60 * 1000 - (Date.now() - parseInt(timestamp))) /
+            60 /
+            1000
+          ).toFixed(0)} minutes`
+        );
+        const aqi = JSON.parse(cachedAqi).aqi;
+        console.log(aqi);
 
-    function getAqi() {
-      ////////////// for testing purposes
-      aqi = 12; ////////////// for testing purposes
+        uiChanger(aqi);
+      } else {
+        console.log('Time to update');
+        const rawData = await fetch(
+          'https://api.airvisual.com/v2/nearest_city?lat=18.7883&lon=98.9853&key=0fcbe316-1ca4-4621-a9d2-329e605f7c98'
+        );
 
-      return uiChanger(aqi);
+        const jsoned = await rawData.json();
+        let aqi = await jsoned.data.current.pollution.aqius;
+
+        // Store data in local storage
+        localStorage.setItem('cachedAqi', JSON.stringify({ aqi }));
+        localStorage.setItem('timestamp', Date.now());
+
+        //////////////////////////// function getAqi() {
+        //////////////////////////// aqi = 12;
+        console.log('No errors');
+        return uiChanger(aqi);
+      }
+    } catch (error) {
+      console.log('An error occurred:', error);
     }
-  } catch (error) {
-    console.log('An error occurred:', error);
   }
-
   function uiChanger(aqi) {
     const body = document.querySelector('body');
     let bgContainer = document.querySelector('#background-container');
@@ -27,7 +50,7 @@
 
     document.querySelector('#spinner').style.display = 'none'; // Hiding the spinner
 
-    // Preparing UI variables based upon AQI:
+    // Preparing UI variables based on AQI:
     if (aqi < 51) {
       body.style.backgroundColor = '#83d77d';
       emoji = '/static/emoji/good.png';
@@ -76,5 +99,5 @@
     document.querySelector('title').textContent = `The air is ${diagnosis}!`; // Changing the page title
   }
 
-  getAqi();
+  getAqi(); // Calling the first function
 })();

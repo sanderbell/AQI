@@ -91,7 +91,7 @@ footer {
 }
 
 @keyframes slide-up {
-    
+
     0% {
         background-position: 0 1000%;
     }
@@ -103,7 +103,7 @@ footer {
 
 
 @media (orientation: landscape) and (max-width: 1000px) {
-    
+
     #background-container {
         animation: slide-up 150s linear infinite;
     }
