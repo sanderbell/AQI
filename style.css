@@ -53,11 +53,12 @@ body {
     background-color: #000;
     border-radius: 2.5em;
     opacity: 0.9;
-    padding: 1.5em;
+    padding: 2.5em;
+    max-width: 90vw;
 }
 
 #aqi {
-    font-size: 25vw;
+    font-size: 27vw;
     margin: 0 0.1em;
     text-align: center;
     user-select: none;
@@ -76,9 +77,9 @@ a:hover {
 
 footer {
     background-color: #00000036;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     border-radius: 0.3em;
-    bottom: 1.6rem;
+    bottom: 2rem;
     color: #fff;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 300;
@@ -89,7 +90,7 @@ footer {
     transform: translateX(-50%);
 }
 
-@keyframes slide-up {    
+@keyframes slide-up {
     0% {
         background-position: 0 1000%;
     }
@@ -97,4 +98,24 @@ footer {
     100% {
         background-position: 0 0;
     }
-     }
+}
+
+
+@media (orientation: landscape) and (max-width: 1000px) {
+
+    #background-container {
+        animation: slide-up 150s linear infinite;
+
+    }
+
+    #aqi {
+        font-size: 28vh;
+    }
+
+    footer {
+        font-size: 0.7rem;
+        border-radius: 0.3em;
+        bottom: 1rem;
+    }
+
+}

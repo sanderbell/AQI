@@ -9,9 +9,9 @@
     const jsoned = await rawData.json();
     let result = await jsoned.data.current.pollution.aqius;
 
-  // function getAqi() { // for testing purposes
-  //   result = 2234; // for testing purposes
-  
+    // function getAqi() { // for testing purposes
+    //   result = 2234; // for testing purposes
+
     const body = document.querySelector('body');
     let backgroundContainer = document.querySelector('#background-container');
     let emoji, diagnosis, favicon;
