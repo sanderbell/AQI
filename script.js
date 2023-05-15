@@ -5,16 +5,14 @@
     try {
       const cachedAqi = localStorage.getItem('cachedAqi');
       const timestamp = localStorage.getItem('timestamp');
-      const timeToUpdate = Date.now() - parseInt(timestamp) >= 3 * 60 * 1000;
+      const timeToUpdate = Date.now() - parseInt(timestamp) >= 30 * 60 * 1000;
 
-      // Is there cached data yet
-      //and was it updated less than 3 mins ago?
+      // Is there cached data yet and was it updated < 30 mins ago?
       if (cachedAqi && !timeToUpdate) {
         console.log(
           `Too early to update. Next API fetch will be in ${(
-            (3 * 60 * 1000 - (Date.now() - parseInt(timestamp))) /
-            60 /
-            1000
+            (30 * 60 * 1000 - (Date.now() - parseInt(timestamp))) /
+            1000 / 60
           ).toFixed(0)} minutes`
         );
         const aqi = JSON.parse(cachedAqi).aqi;
@@ -96,7 +94,9 @@
 
     bgContainer.style.backgroundImage = `url(${emoji})`; // Changing the background
     document.querySelector('#aqi').textContent = `${aqi}`; // Changing AQI — the main content
-    document.querySelector('title').textContent = `The air is ${diagnosis}!`; // Changing the page title
+    document.querySelector(
+      'title'
+    ).textContent = `AQI = ${aqi} · The air is ${diagnosis}!`; // Changing the page title
   }
 
   getAqi(); // Calling the first function
