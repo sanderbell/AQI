@@ -12,7 +12,8 @@
         console.log(
           `Too early to update. Next API fetch will be in ${(
             (30 * 60 * 1000 - (Date.now() - parseInt(timestamp))) /
-            1000 / 60
+            1000 /
+            60
           ).toFixed(0)} minutes`
         );
         const aqi = JSON.parse(cachedAqi).aqi;
@@ -26,7 +27,7 @@
         );
 
         const jsoned = await rawData.json();
-        let aqi = await jsoned.data.current.pollution.aqius;
+        const aqi = await jsoned.data.current.pollution.aqius;
 
         // Store data in local storage
         localStorage.setItem('cachedAqi', JSON.stringify({ aqi }));
@@ -38,12 +39,21 @@
         return uiChanger(aqi);
       }
     } catch (error) {
-      console.log('An error occurred:', error);
+      if (error instanceof NetworkError) {
+        // Handle network errors
+        console.error('A network error occurred:', error);
+      } else if (error instanceof TimeoutError) {
+        // Handle timeout errors
+        console.error('A timeout error occurred:', error);
+      } else {
+        // Handle other types of errors
+        console.error('An unknown error occurred:', error);
+      }
     }
   }
   function uiChanger(aqi) {
     const body = document.querySelector('body');
-    let bgContainer = document.querySelector('#background-container');
+    const bgContainer = document.querySelector('#background-container');
     let emoji, diagnosis, favicon;
 
     document.querySelector('#spinner').style.display = 'none'; // Hiding the spinner
@@ -96,7 +106,7 @@
     document.querySelector('#aqi').textContent = `${aqi}`; // Changing AQI — the main content
     document.querySelector(
       'title'
-    ).textContent = `AQI = ${aqi} · The air is ${diagnosis}!`; // Changing the page title
+    ).textContent = `AQI = ${aqi} × The air is ${diagnosis}!`; // Changing the page title
   }
 
   getAqi(); // Calling the first function
