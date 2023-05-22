@@ -58,7 +58,8 @@ body {
 }
 
 #aqi {
-    font-size: 27vw;
+    /* font-size: 27vw; */
+    font-size: 42vmin;
     margin: 0 0.1em;
     text-align: center;
     user-select: none;
