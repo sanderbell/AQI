@@ -33,9 +33,8 @@
         localStorage.setItem('cachedAqi', JSON.stringify({ aqi }));
         localStorage.setItem('timestamp', Date.now());
 
-        //////////////////////////// function getAqi() {
-        //////////////////////////// aqi = 12;
-        console.log('No errors');
+
+        
         return uiChanger(aqi);
       }
     } catch (error) {

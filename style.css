@@ -13,6 +13,7 @@ html {
     box-sizing: inherit;
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 body {
@@ -62,7 +63,6 @@ body {
     font-size: 42vmin;
     margin: 0 0.1em;
     text-align: center;
-    user-select: none;
 }
 
 a {
