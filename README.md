@@ -1,6 +1,6 @@
 # Emojified Air Quality in Chiang Mai
 
-![Live Air Quality](./demo.png "Live Air Quality")
+![Live Air Quality](./demo.png "Live Air Quality") 
 
 ## Overview
 
