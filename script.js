@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  async function getAqi() {
+  async function getAqi() { 
     try {
       const cachedAqi = localStorage.getItem('cachedAqi');
       const timestamp = localStorage.getItem('timestamp');

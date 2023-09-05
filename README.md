@@ -1,5 +1,7 @@
 # Emojified Air Quality in Chiang Mai
 
+![Live Air Quality](./demo.gif "Live Air Quality")
+
 ## Overview
 
 Emojified Air Quality in Chiang Mai is a web application that provides real-time Air Quality Index (AQI) data for Chiang Mai. The app fetches the latest AQI data from an API and presents it in a visually appealing and user-friendly manner. Additionally, the application implements caching to improve performance and reduce API calls, ensuring a seamless user experience.
