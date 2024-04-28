@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  async function getAqi() { 
+  async function getAqi() {
     try {
       const cachedAqi = localStorage.getItem('cachedAqi');
       const timestamp = localStorage.getItem('timestamp');
@@ -23,7 +23,7 @@
       } else {
         console.log('Time to update');
         const rawData = await fetch(
-          'https://api.airvisual.com/v2/nearest_city?lat=18.7883&lon=98.9853&key=0fcbe316-1ca4-4621-a9d2-329e605f7c98'
+          'https://api.airvisual.com/v2/nearest_city?lat=18.7883&lon=98.9853&key=ac499f02-eb50-4469-ad61-0f3f6c6e58b8'
         );
 
         const jsoned = await rawData.json();
@@ -33,8 +33,6 @@
         localStorage.setItem('cachedAqi', JSON.stringify({ aqi }));
         localStorage.setItem('timestamp', Date.now());
 
-
-        
         return uiChanger(aqi);
       }
     } catch (error) {
@@ -58,36 +56,43 @@
     document.querySelector('#spinner').style.display = 'none'; // Hiding the spinner
 
     // Preparing UI variables based on AQI:
-    if (aqi < 51) {
-      body.style.backgroundColor = '#83d77d';
-      emoji = '/static/emoji/good.png';
-      favicon = '/static/favicons/good.ico';
-      diagnosis = 'good';
-    } else if (aqi >= 50 && aqi < 100) {
-      body.style.backgroundColor = '#f5b200';
-      emoji = '/static/emoji/moderate.png';
-      favicon = '/static/favicons/moderate.ico';
-      diagnosis = 'okayish';
-    } else if (aqi >= 100 && aqi < 150) {
-      body.style.backgroundColor = '#ff8119';
-      emoji = '/static/emoji/ufsg.png';
-      favicon = '/static/favicons/ufsg.ico';
-      diagnosis = 'unhealthy for sensitive groups';
-    } else if (aqi >= 150 && aqi < 200) {
-      body.style.backgroundColor = '#e55659';
-      emoji = '/static/emoji/unhealthy.png';
-      favicon = '/static/favicons/unhealthy.ico';
-      diagnosis = 'unhealthy';
-    } else if (aqi >= 200 && aqi < 300) {
-      body.style.backgroundColor = '#9d75b6';
-      emoji = '/static/emoji/very-unhealthy.png';
-      favicon = '/static/favicons/very-unhealthy.ico';
-      diagnosis = 'very unhealthy';
-    } else if (aqi >= 300) {
-      body.style.backgroundColor = '#3a2c3d';
-      favicon = '/static/favicons/hazardous.ico';
-      emoji = '/static/emoji/hazardous.png';
-      diagnosis = 'hazardous';
+    switch (true) {
+      case aqi < 51:
+        body.style.backgroundColor = '#83d77d';
+        emoji = '/static/emoji/good.png';
+        favicon = '/static/favicons/good.ico';
+        diagnosis = 'good';
+        break;
+      case aqi >= 50 && aqi < 100:
+        body.style.backgroundColor = '#f5b200';
+        emoji = '/static/emoji/moderate.png';
+        favicon = '/static/favicons/moderate.ico';
+        diagnosis = 'okayish';
+        break;
+      case aqi >= 100 && aqi < 150:
+        body.style.backgroundColor = '#ff8119';
+        emoji = '/static/emoji/ufsg.png';
+        favicon = '/static/favicons/ufsg.ico';
+        diagnosis = 'unhealthy for sensitive groups';
+        break;
+      case aqi >= 150 && aqi < 200:
+        body.style.backgroundColor = '#e55659';
+        emoji = '/static/emoji/unhealthy.png';
+        favicon = '/static/favicons/unhealthy.ico';
+        diagnosis = 'unhealthy';
+        break;
+      case aqi >= 200 && aqi < 300:
+        body.style.backgroundColor = '#9d75b6';
+        emoji = '/static/emoji/very-unhealthy.png';
+        favicon = '/static/favicons/very-unhealthy.ico';
+        diagnosis = 'very unhealthy';
+        break;
+      case aqi >= 300:
+        body.style.backgroundColor = '#3a2c3d';
+        favicon = '/static/favicons/hazardous.ico';
+        emoji = '/static/emoji/hazardous.png';
+        diagnosis = 'hazardous';
+        break;
     }
 
     // Changing the favicon:
